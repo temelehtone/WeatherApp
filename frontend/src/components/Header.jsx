@@ -2,20 +2,24 @@ import React from "react";
 import logo from "../assets/jeletele_logo_blue_main.png";
 import { FaBars } from "react-icons/fa";
 
-const Header = ({ user, setUser, newMessage }) => {
+const Header = ({ user, setUser, newMessage, setCurrentPage }) => {
   const [menuOpen, setMenuOpen] = React.useState(false);
 
   const logOut = (e) => {
     e.preventDefault();
     if (!user) {
-     window.location = "/auth";
+     setCurrentPage("auth");
       return;
     }
     window.localStorage.removeItem("loggedUser");
     setUser(null);
     newMessage("success", "Logged out successfully!");
-   window.location = "/";
+   setCurrentPage("home");
   };
+
+  const navigateTo = (location) => {
+    setCurrentPage(location)
+  }
 
   return (
     <>
@@ -25,8 +29,8 @@ const Header = ({ user, setUser, newMessage }) => {
             <div className="container px-4 flex flex-wrap items-center justify-between">
               <div className="w-full relative flex justify-between lg:w-auto px-4 lg:static lg:block lg:justify-start">
                 <a
-                  className="text-2xl font-bold leading-relaxed inline-block mr-4 py-2 whitespace-nowrap uppercase text-white"
-                  href="/"
+                  className="text-2xl font-bold leading-relaxed inline-block mr-4 py-2 whitespace-nowrap uppercase text-white cursor-pointer"
+                  onClick={() => navigateTo("home")}
                 >
                   <img src={logo} className="h-10" />
                 </a>
@@ -48,16 +52,16 @@ const Header = ({ user, setUser, newMessage }) => {
                 <ul className="flex flex-col lg:flex-row list-none lg:ml-auto">
                   <li className="nav-item">
                     <a
-                      className="px-3 py-2 flex items-center text-xs uppercase font-bold leading-snug text-white hover:opacity-75"
-                      href="/"
+                      className="px-3 py-2 flex items-center text-xs uppercase font-bold leading-snug text-white hover:opacity-75 cursor-pointer"
+                      onClick={() => navigateTo("home")}
                     >
                       Home
                     </a>
                   </li>
                   <li className="nav-item">
                     <a
-                      className="px-3 py-2 flex items-center text-xs uppercase font-bold leading-snug text-white hover:opacity-75"
-                      href="/favorites"
+                      className="px-3 py-2 flex items-center text-xs uppercase font-bold leading-snug text-white hover:opacity-75 cursor-pointer"
+                      onClick={() => navigateTo("favorites")}
                     >
                       Favorites
                     </a>

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Input from "../components/Input";
 import authService from "../services/auth";
 
-const Auth = ({ setUser, newMessage }) => {
+const Auth = ({ setUser, newMessage, setCurrentPage }) => {
   const [showLogin, setShowLogin] = useState(true);
   const [name, setName] = useState("");
   const [username, setUsername] = useState("");
@@ -29,7 +29,7 @@ const Auth = ({ setUser, newMessage }) => {
       setName("");
       setUsername("");
       setPassword("");
-      window.location = "/";
+      setCurrentPage("home");
     } catch (error) {
       newMessage("error", error.response.data.message);
     }

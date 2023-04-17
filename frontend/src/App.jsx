@@ -3,7 +3,6 @@ import weatherService from "./services/weather";
 import favoriteService from "./services/favorite";
 import helper from "./utils/helper";
 import Header from "./components/Header";
-import { BrowserRouter, Route, Routes } from "react-router-dom"
 import Home from "./pages/Home";
 import Favorites from "./pages/Favorites";
 import Auth from "./pages/Auth";
@@ -18,6 +17,7 @@ function App() {
   const [successMessage, setSuccessMessage] = useState(null);
   const [errorMessage, setErrorMessage] = useState(null);
   const [favorites, setFavorites] = useState([]);
+  const [currentPage, setCurrentPage] = useState("home")
 
   useEffect(() => {
     const loggedUserJSON = window.localStorage.getItem("loggedUser");
@@ -80,18 +80,16 @@ function App() {
   };
 
   return (
-  <BrowserRouter>
-    <Header user={user} setUser={setUser} newMessage={newMessage} />
+  <>
+    <Header user={user} setUser={setUser} newMessage={newMessage} setCurrentPage={setCurrentPage} />
     {errorMessage && <ErrorAlert message={errorMessage} />}
     {successMessage && <SuccessAlert message={successMessage} />}
-    <div className="my-6">    
-      <Routes>
-        <Route path="/" element={<Home weatherData={weatherData} selectedCity={selectedCity} setSelectedCity={setSelectedCity} favorites={favorites} user={user} />} />
-        <Route path="/favorites" element={<Favorites newMessage={newMessage} favorites={favorites} user={user} setFavorites={setFavorites} />} />
-        <Route path="/auth" element={<Auth newMessage={newMessage} setUser={setUser} />} />
-      </Routes>
+    <div className="my-6">   
+      {currentPage === "home" && <Home weatherData={weatherData} selectedCity={selectedCity} setSelectedCity={setSelectedCity} favorites={favorites} user={user} />} 
+      {currentPage === "favorites" && <Favorites newMessage={newMessage} favorites={favorites} user={user} setFavorites={setFavorites} setCurrentPage={setCurrentPage} />} 
+      {currentPage === "auth" && <Auth newMessage={newMessage} setUser={setUser} setCurrentPage={setCurrentPage} />} 
     </div>
-    </BrowserRouter>
+    </>
   );
 }
 

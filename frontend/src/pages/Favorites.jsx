@@ -4,7 +4,7 @@ import { FaTrashAlt, FaStar } from "react-icons/fa"
 import Search from "../components/Search";
 import favoriteService from "../services/favorite"
 
-const Favorites = ({ newMessage, favorites, user, setFavorites }) => {
+const Favorites = ({ newMessage, favorites, user, setFavorites, setCurrentPage }) => {
   const [searchText, setSearchText] = useState("");
 
   let id = -1;
@@ -32,7 +32,7 @@ const Favorites = ({ newMessage, favorites, user, setFavorites }) => {
     e.preventDefault();
     favoriteService.deleteFavorite(user.username, e.target.value);
     setFavorites(favorites.filter(f => f.city !== e.target.value))
-    newMessage("success", `${searchText} deleted from favorites!`);
+    newMessage("success", `${e.target.value} deleted from favorites!`);
 
   }
   if (!user) return (
@@ -40,7 +40,7 @@ const Favorites = ({ newMessage, favorites, user, setFavorites }) => {
       <h2 className="text-center my-6 text-2xl
       ">Login if you want to add favorite cities!</h2>
       <button
-          onClick={() => window.location = "/auth"}
+          onClick={() => setCurrentPage("auth")}
           className="bg-bg-blue text-white px-5 py-3 rounded-lg"
         >
           Login
