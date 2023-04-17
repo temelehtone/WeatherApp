@@ -1,0 +1,52 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html,
+body {
+  min-height: 100vh;
+}
+body {
+  background-color: #f8f9fa;
+}
+@media screen and (max-width: 767px) {
+  .weather-card-wrapper {
+    -ms-overflow-style: none; /* Internet Explorer 10+ */
+    scrollbar-width: none; /* Firefox */
+  }
+  .weather-card-wrapper::-webkit-scrollbar {
+    display: none; /* Safari and Chrome */
+  }
+}
+.city-grid {
+  grid-template-columns: 1fr 2fr;
+}
+
+.lds-dual-ring {
+  display: inline-block;
+  width: 300px;
+  height: 300px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.lds-dual-ring:after {
+  content: " ";
+  display: block;
+  width: 64px;
+  height: 64px;
+  margin: 8px;
+  border-radius: 50%;
+  border: 6px solid #066496;
+  border-color: #066496 transparent #066496 transparent;
+  animation: lds-dual-ring 1.2s linear infinite;
+}
+@keyframes lds-dual-ring {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
