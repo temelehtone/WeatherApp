@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 
 import helper from "../utils/helper";
 
@@ -7,9 +7,14 @@ import WeatherComponent from "../components/WeatherComponent";
 import Loading from '../components/Loading';
 
 const Home = ({ weatherData, selectedCity, setSelectedCity, favorites, user }) => {
+
+  useEffect(() => {
+    setSelectedCity("all");
+  }, [])
+
   return (
     <div className="flex min-h-full gap-4 align-center flex-col justify-center px-6">
-        <SelectBox cities={user && favorites?.length > 0 ?  favorites : helper.cities} setSelectedCity={setSelectedCity} />
+        <SelectBox cities={user && favorites?.length > 0 ?  favorites : helper.cities} setSelectedCity={setSelectedCity} selectedCity={selectedCity} />
         {weatherData && weatherData.length > 0 ? (
           weatherData.map((data) => {
             if (

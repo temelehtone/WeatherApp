@@ -1,6 +1,6 @@
 import React from "react";
 
-const SelectBox = ({cities, setSelectedCity}) => {
+const SelectBox = ({cities, setSelectedCity, selectedCity}) => {
   const changeCity = (e) => {
     e.preventDefault();
     setSelectedCity(e.target.value);
@@ -11,6 +11,7 @@ const SelectBox = ({cities, setSelectedCity}) => {
       id="cities"
       onChange={changeCity}
       className="p-4 rounded border-2"
+      value={selectedCity}
     >
       <option value="all">All cities</option>
       {cities && cities.map((c) => (

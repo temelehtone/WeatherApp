@@ -29,6 +29,7 @@ const Auth = ({ setUser, newMessage, setCurrentPage }) => {
       setName("");
       setUsername("");
       setPassword("");
+      
       setCurrentPage("home");
     } catch (error) {
       newMessage("error", error.response.data.message);
