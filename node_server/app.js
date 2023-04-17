@@ -24,9 +24,9 @@ app.use(express.json());
 app.use(express.static("dist"));
 app.use(middleware.requestLogger);
 
-app.get("test", (req, res) => {
-  return res.json(200);
-})
+app.get('/test', (req, res) => {
+  res.status(200).send("Everything is working!");
+});
 
 app.use("/auth", authRouter);
 app.use("/weather", weatherRouter);
