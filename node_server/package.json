@@ -7,7 +7,7 @@
     "start": "node index.js",
     "dev": "nodemon index.js",
     "test": "jest --verbose",
-    "build": "npm install"
+    "build": "npm install --save"
   },
   "keywords": [],
   "author": "",
